@@ -9,7 +9,7 @@ Three steps, in the order of the work:
                       feedback, marked pages; class statistics
     3 Check           the flagged answers one by one next to the page; accept or change the marks
     Settings          the grading options a teacher can change
-    How it works      the pipeline in one picture
+    How it works      slideshow: the approach, pipeline, a sheet's lifecycle, one answer, flags
 
 Environment variables:
     AUTOGRADER_PROFILE              model profile to start with (see config.yaml)
@@ -1121,6 +1121,17 @@ def _settings_tab() -> list:
             s_gdet, s_refl, s_recheck, s_links, s_attempt, s_ocr, s_force, s_tools, s_loc, s_fbtr, s_class]
 
 
+HOW_CAPTIONS = {  # captions for the How it works slides (docs/images/how/NN_<name>.png)
+    "approach": "Agents propose, rule checks verify",
+    "pipeline": "From exam files to marked pages",
+    "sheet-life": "A sheet's lifecycle: every case",
+    "question-flow": "Every check on one answer",
+    "flags": "What sends an answer to the teacher",
+    "journey": "The teacher's three steps",
+    "robust": "When things go wrong",
+}
+
+
 def build_app() -> gr.Blocks:
     """Lay out the steps and connect every button to its handler.
 
@@ -1254,10 +1265,15 @@ def build_app() -> gr.Blocks:
 
             # ---------------------------------------------------------------- how it works
             with gr.Tab("How it works", id="help"):
-                diagram = ROOT / "docs" / "images" / "pipeline.png"
-                if diagram.exists():
-                    gr.Image(str(diagram), show_label=False, interactive=False, container=False)
-                gr.Markdown((ROOT / "ui" / "how_it_works.md").read_text(encoding="utf-8"))
+                # slides from the project presentation, shown one at a time (arrows, thumbnails, full screen)
+                slides = sorted((ROOT / "docs" / "images" / "how").glob("*.png"))
+                if slides:
+                    gr.Gallery([(str(s), HOW_CAPTIONS.get(s.stem[3:], "")) for s in slides], show_label=False,
+                               preview=True, selected_index=0, columns=len(slides), object_fit="contain",
+                               height=820, allow_preview=True, show_download_button=False,
+                               show_share_button=False, show_fullscreen_button=True)
+                with gr.Accordion("The same in words", open=False):
+                    gr.Markdown((ROOT / "ui" / "how_it_works.md").read_text(encoding="utf-8"))
 
         # ---------------------------------------------------------------- events
         lock = [btn_draft, btn_json, rubric_df, btn_grade, btn_class, mode, sample_exam]

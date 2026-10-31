@@ -80,3 +80,7 @@ variants:
     settings: {n_samples: 1, ocr_backend: vlm}
   - name: n1_ocr_bodhan
     settings: {n_samples: 1, ocr_backend: bodhan}
+
+  - name: n1_cal_lenient       # teacher examples + lenient
+    rubric_source: file
+    settings: {n_samples: 1, strictness: lenient}

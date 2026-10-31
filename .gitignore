@@ -30,4 +30,4 @@ eval/datasets/saf_*.csv
 eval/datasets/jorgpt*
 
 # ablation run log (scripts/run_ablations.ps1)
-ablation_log.txt
+ablation_log.txtablation_log2.txt
