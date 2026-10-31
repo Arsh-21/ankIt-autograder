@@ -57,7 +57,7 @@ Windows (PowerShell):
 
 ```powershell
 git clone https://github.com/Arsh-21/ankIt-autograder.git
-cd autograder
+cd ankIt-autograder
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
