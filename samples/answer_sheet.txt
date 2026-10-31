@@ -1,0 +1,15 @@
+Name: Test Student        Roll no: DA00X000
+
+Q2. Using formula output = (W - K + 2P)/S + 1
+= (32 - 5 + 2)/1 + 1
+= 28
+So output is 28 x 28.
+
+Q1. In deep networks when we do backprop the gradient gets multiplied by the derivative of the activation at every layer. For sigmoid the derivative is at most 0.25 so after many layers the gradient becomes very small and the first layers stop learning. This is called vanishing gradient. We can use ReLU activation to fix this.
+
+Q3.
+def softmax(x):
+    import math
+    exps = [math.exp(v) for v in x]
+    total = sum(exps)
+    return [e/total for e in exps]

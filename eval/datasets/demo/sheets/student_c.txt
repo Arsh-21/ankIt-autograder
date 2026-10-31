@@ -1,0 +1,5 @@
+Q1. Vanishing gradient means the gradient becomes very small in deep networks so training is slow.
+
+Q2. Formula is (W - K + 2P)/S + 1. Output = 32.
+
+Q3.

@@ -1,0 +1,13 @@
+sheet,question_id,marks
+student_a,Q1,4
+student_a,Q2,2
+student_a,Q3,2
+student_b,Q1,4
+student_b,Q2,3
+student_b,Q3,3
+student_c,Q1,1
+student_c,Q2,1
+student_c,Q3,0
+student_d_scan,Q1,4
+student_d_scan,Q2,2
+student_d_scan,Q3,2

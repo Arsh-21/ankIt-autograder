@@ -1,0 +1,24 @@
+Quiz 2 - model answers
+Q1. (c)
+Q2. (b)  3x3x64x128 + 128 = 73,856
+Q3. out = (64 - 5 + 2x2)/2 + 1 = floor(31.5) + 1 = 32
+    shape 32 x 32 x 16
+    params = 5x5x3x16 + 16 = 1216
+Q4. flatten: 32x32x16 = 16384
+    weights 16384 x 10 = 163840
+    + 10 biases = 163850
+Q5. z = wx + b,  y = sigmoid(z)
+    dL/dw = dL/dy . dy/dz . dz/dw
+          = (y - t) . y(1 - y) . x
+Q6. Training: each unit dropped with prob p, so a
+    different thinned net every step and units can't
+    co-adapt. Test: keep all units, scale by (1 - p)
+    (or inverted dropout: divide by 1-p while training).
+    Like averaging an ensemble -> less overfitting.
+Q7. def softmax(x):
+        m = max(x)
+        e = [math.exp(v - m) for v in x]
+        s = sum(e)
+        return [v / s for v in e]
+    e^(x-m) / sum e^(x-m) = e^x / sum e^x since e^-m
+    cancels; biggest exponent is 0 so no overflow.

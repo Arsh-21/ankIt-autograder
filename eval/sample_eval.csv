@@ -1,0 +1,7 @@
+id,question,model_answer,max_marks,student_answer,human_score
+1,What is the role of a learning rate in gradient descent?,It controls the size of each update step: too large overshoots or diverges and too small converges very slowly.,2,It decides how big a step we take in the direction of the negative gradient. If it is too big the loss can blow up.,2
+2,What is the role of a learning rate in gradient descent?,It controls the size of each update step: too large overshoots or diverges and too small converges very slowly.,2,Learning rate is the number of epochs we train for.,0
+3,Why do we use a validation set?,To tune hyperparameters and detect overfitting on data the model was not trained on.,2,To check accuracy.,0.5
+4,Why do we use a validation set?,To tune hyperparameters and detect overfitting on data the model was not trained on.,2,We use it to choose hyperparameters like learning rate and to see if the model is overfitting since it is not used in training.,2
+5,What does dropout do during training?,It randomly sets a fraction of activations to zero at each step so the network cannot rely on any single unit; this acts as regularisation.,2,It randomly turns off some neurons in each iteration which reduces overfitting.,2
+6,What does dropout do during training?,It randomly sets a fraction of activations to zero at each step so the network cannot rely on any single unit; this acts as regularisation.,2,It removes neurons with small weights permanently.,0

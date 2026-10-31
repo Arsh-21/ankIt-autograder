@@ -1,0 +1,34 @@
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#FFFFFF','primaryBorderColor':'#1F3A6E','primaryTextColor':'#1B2A4A','lineColor':'#5B6B82','fontFamily':'Helvetica','fontSize':'15px'}}}%%
+flowchart TB
+  subgraph S1[Exam setup]
+    direction LR
+    QP[Question paper<br/>marking scheme<br/>model answer] --> RA[Rubric agent<br/>as_is or expand]
+    RA --> TA1([TA edits rubric<br/>then it is frozen])
+  end
+  subgraph S2[Reading the sheet]
+    direction LR
+    F[PDF / Word / photos<br/>any language] --> I[Ingest<br/>text layer or image]
+    I --> O[OCR agent<br/>vision LLM or Bodhan]
+    O --> SG[Segmenter<br/>answer per question]
+  end
+  subgraph S3[Each question, in parallel]
+    direction LR
+    C1[Rule checks<br/>grounding, injection,<br/>blank] --> G[Grader x N<br/>page image + text]
+    G --> V[Rule checks<br/>quote must exist]
+    V --> A[Aggregate<br/>percentile + confidence]
+    A --> CR{Grades<br/>disagree?}
+    CR -- yes --> CT[Critic + re-grade]
+    CR -- no --> RC
+    CT --> RC{Marks lost on<br/>handwriting?}
+    RC -- yes --> RE[OCR re-check<br/>fix misreading, re-grade]
+    RC -- no --> FL
+    RE --> FL[Review flags]
+  end
+  TA1 --> C1
+  SG --> C1
+  FL --> OUT[Report, red-ink pages,<br/>class analytics]
+  OUT --> TA2([TA reviews flagged<br/>questions])
+  classDef agent fill:#EEF2F9,stroke:#1F3A6E,stroke-width:2px;
+  classDef human fill:#FFF4E5,stroke:#A14D00,stroke-width:2px;
+  class RA,O,SG,G,CT,RE agent;
+  class TA1,TA2 human;

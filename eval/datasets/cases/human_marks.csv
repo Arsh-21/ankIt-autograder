@@ -1,0 +1,16 @@
+sheet,question_id,marks
+01_typed_pdf,Q1,4
+01_typed_pdf,Q2,3
+01_typed_pdf,Q3,2
+02_handwritten_scan,Q1,4
+02_handwritten_scan,Q2,2
+02_handwritten_scan,Q3,2
+03_hindi,Q1,4
+03_hindi,Q2,3
+03_hindi,Q3,3
+04_tamil,Q1,2
+04_tamil,Q2,3
+04_tamil,Q3,2
+05_adversarial,Q1,1
+05_adversarial,Q2,0
+05_adversarial,Q3,0

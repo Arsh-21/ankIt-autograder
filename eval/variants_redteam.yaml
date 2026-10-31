@@ -1,0 +1,21 @@
+# Prompt-injection ablation (K in docs/SETTINGS_AND_ABLATIONS.md). Run on a red-team dataset made with
+#   python scripts/make_redteam.py --dataset eval/datasets/demo --out eval/datasets/demo_redteam
+# Human marks are unchanged by the attack, so any rise in "bias" is the
+# attack working. "review" shows how often attacked answers got flagged.
+
+base:
+  n_samples: 1
+  use_reflection: false
+  ocr_recheck: false
+
+variants:
+  - name: defence_none
+    settings: {guard_prompt: false, guard_detector: "off"}
+  - name: defence_prompt
+    settings: {guard_prompt: true, guard_detector: "off"}
+  - name: defence_detector_flag
+    settings: {guard_prompt: false, guard_detector: flag}
+  - name: defence_detector_strip
+    settings: {guard_prompt: false, guard_detector: strip}
+  - name: defence_all
+    settings: {guard_prompt: true, guard_detector: strip}

@@ -1,0 +1,82 @@
+# Ablation variants. Each variant = the base settings + its own changes.
+# Setting names are the same as config.yaml `defaults:`.
+#   inputs:        reference files given to the rubric agent
+#                  (default [rubric, model_answer]; [] = question paper only)
+#   rubric_source: agent (default) or file (use the dataset's rubric.json, e.g. with teacher examples)
+#   mode:          single_call = grade the whole sheet in one call (no pipeline)
+#
+# Run a few at a time with --only, e.g.
+#   python eval/run_ablation.py --dataset eval/datasets/mendeley --profile openrouter \
+#       --sheets @eval/datasets/mendeley/split_ablation.txt --questions 21-35 --only n1,n1_ref_none
+
+base:
+  n_samples: 3
+
+variants:
+  # ---- the full system
+  - name: full                 # default settings (3 passes per question)
+  - name: n1                   # default settings, 1 pass (reference row for the 1-pass ablations)
+    settings: {n_samples: 1}
+  - name: n5                   # default settings, 5 passes; then eval/offline.py gives 1-5 passes,
+    settings: {n_samples: 5}   # ways of combining them and the quote check on/off, for free
+
+  # ---- A. what the grader is given (GPT4-Hand 2411.05231, EngExams 2601.00730)
+  - name: n1_ref_none          # question paper only
+    inputs: []
+    settings: {n_samples: 1}
+  - name: n1_ref_key           # + model answer
+    inputs: [model_answer]
+    settings: {n_samples: 1}
+  - name: n1_ref_scheme        # + marking scheme
+    inputs: [rubric]
+    settings: {n_samples: 1}
+
+  # ---- B. rubric granularity (HITL-Maths 2603.13083, GLaH 2405.19694)
+  - name: n1_expand
+    settings: {n_samples: 1, rubric_mode: expand}
+
+  # ---- C. what the grader looks at (EDU-CIRCUIT 2602.00095)
+  - name: n1_input_text
+    settings: {n_samples: 1, grader_input: text}
+  - name: n1_input_image
+    settings: {n_samples: 1, grader_input: image}
+
+  # ---- G. strictness
+  - name: n1_lenient
+    settings: {n_samples: 1, strictness: lenient}
+  - name: n1_strict
+    settings: {n_samples: 1, strictness: strict}
+
+  # ---- H. teacher-marked examples (scripts/make_calibration.py writes rubric.json)
+  - name: n1_calibrated
+    rubric_source: file
+    settings: {n_samples: 1}
+
+  # ---- single components
+  - name: n1_recheck           # OCR re-check switched on
+    settings: {n_samples: 1, ocr_recheck: true}
+  - name: n1_no_links          # no linked questions
+    settings: {n_samples: 1, cross_references: false}
+  - name: n1_judgement         # grader uses its own judgement with proportional half marks
+    settings: {n_samples: 1, grading_style: judgement}
+  - name: n1_attempt           # course policy: an on-topic attempt earns at least half the marks
+    settings: {n_samples: 1, attempt_credit: 0.5}
+
+  # ---- baselines
+  - name: baseline_plain       # OCR + one text-only grading call per question, all extras off
+    settings: {n_samples: 1, grader_input: text, use_reflection: false, ocr_recheck: false,
+               evidence_check: "off", guard_prompt: false, guard_detector: "off", rubric_mode: as_is}
+  - name: baseline_single_call # the whole sheet in one call: page images + rubric -> all marks
+    mode: single_call
+    settings: {n_samples: 1}
+
+  # ---- combinations
+  - name: n1_best              # lenient + page image + teacher examples
+    rubric_source: file
+    settings: {n_samples: 1, strictness: lenient, grader_input: image}
+
+  # ---- OCR engine (Indic sheets)
+  - name: n1_ocr_vlm
+    settings: {n_samples: 1, ocr_backend: vlm}
+  - name: n1_ocr_bodhan
+    settings: {n_samples: 1, ocr_backend: bodhan}

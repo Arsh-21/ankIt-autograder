@@ -1,0 +1,41 @@
+[project]
+name = "autograder"
+version = "1.0.0"
+description = "Agentic grading of handwritten and typed answer sheets, in English and Indian languages"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Arshpreet Kaur" }]
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.40",
+    "gradio>=5.0,<6",
+    "pymupdf>=1.24",
+    "python-docx>=1.1",
+    "pillow>=10.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "rapidfuzz>=3.0",
+    "numpy>=1.26",
+    "sympy>=1.12",
+    "json-repair>=0.30",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["eval/runs", "outputs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+# long prompt strings and HTML templates read better unbroken
+ignore = ["E501", "B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["agents", "core", "tools", "ui", "eval"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

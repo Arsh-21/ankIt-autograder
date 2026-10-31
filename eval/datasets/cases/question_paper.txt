@@ -1,0 +1,7 @@
+DA3409 Deep Learning - Practice Quiz (10 marks)
+
+Q1. Explain the vanishing gradient problem in deep networks and give one way to reduce it. [4 marks]
+
+Q2. An input image of size 32x32 is passed through a convolution layer with kernel size 5, stride 1 and padding 1. What is the spatial size of the output? Show your working. [3 marks]
+
+Q3. Write a Python function softmax(x) that takes a list of numbers and returns their softmax probabilities. It must be numerically stable. [3 marks]

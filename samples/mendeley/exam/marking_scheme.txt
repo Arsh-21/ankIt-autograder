@@ -1,0 +1,42 @@
+Marking scheme
+
+Part I (Q1-Q20): multiple choice, 1 mark each, all or nothing. The student writes the letter of the chosen option.
+
+Q1 (1 mark): correct option D. Any other option or no answer: 0.
+Q2 (1 mark): correct option C. Any other option or no answer: 0.
+Q3 (1 mark): correct option A. Any other option or no answer: 0.
+Q4 (1 mark): correct option C. Any other option or no answer: 0.
+Q5 (1 mark): correct option B. Any other option or no answer: 0.
+Q6 (1 mark): correct option A. Any other option or no answer: 0.
+Q7 (1 mark): correct option A. Any other option or no answer: 0.
+Q8 (1 mark): correct option C. Any other option or no answer: 0.
+Q9 (1 mark): correct option A. Any other option or no answer: 0.
+Q10 (1 mark): correct option B. Any other option or no answer: 0.
+Q11 (1 mark): correct option B. Any other option or no answer: 0.
+Q12 (1 mark): correct option C. Any other option or no answer: 0.
+Q13 (1 mark): correct option B. Any other option or no answer: 0.
+Q14 (1 mark): correct option C. Any other option or no answer: 0.
+Q15 (1 mark): correct option B. Any other option or no answer: 0.
+Q16 (1 mark): correct option C. Any other option or no answer: 0.
+Q17 (1 mark): correct option B. Any other option or no answer: 0.
+Q18 (1 mark): correct option C. Any other option or no answer: 0.
+Q19 (1 mark): correct option B. Any other option or no answer: 0.
+Q20 (1 mark): correct option B. Any other option or no answer: 0.
+
+Part II (Q21-Q35): short answers, 2 marks each.
+
+Q21 (2 marks): expected key points: A type of ML where the model is trained on labeled data with known inputs and outputs. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q22 (2 marks): expected key points: Overfitting; the model has memorized the training data but failed to generalize. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q23 (2 marks): expected key points: A statistical process for estimating the relationships between a dependent variable and one or more independent variables. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q24 (2 marks): expected key points: Data quality/missing values, overfitting/underfitting, data collection, or time consumption. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q25 (2 marks): expected key points: Healthcare/disease prediction, Finance/fraud detection, E-commerce recommendation systems. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q26 (2 marks): expected key points: Structured is organized in rows/columns (SQL, Excel); Semi-structured has some markers but isn't in a grid (JSON, XML, HTML). Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q27 (2 marks): expected key points: Detection: Z-score, IQR, Scatter plots, Box plots. Handling: Trimming, Capping, or Imputation. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q28 (2 marks): expected key points: The steps taken to clean and transform raw data into a format suitable for a machine learning model. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q29 (2 marks): expected key points: K-NN is distance-based; features with larger scales will dominate the distance calculation if not normalized. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q30 (2 marks): expected key points: By grouping values into bins or intervals, e.g., turning ages 1-100 into 'Child,' 'Adult,' 'Senior.' Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q31 (2 marks): expected key points: The predefined number of clusters or groups the data will be divided into. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q32 (2 marks): expected key points: K in K-NN, Learning Rate, Number of Estimators/Trees, Max Depth, or Batch Size. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q33 (2 marks): expected key points: An optimization algorithm used to minimize the cost function by iteratively moving toward the steepest descent. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q34 (2 marks): expected key points: Discussion on maximizing the margin and ensuring no data points fall within the 'gutter' or margin. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.
+Q35 (2 marks): expected key points: It transforms data into a higher-dimensional space to find a non-linear decision boundary. Award 2 for a correct and complete answer, 1 for a partly correct or incomplete answer, 0 if wrong, irrelevant or blank.

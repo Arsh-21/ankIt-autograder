@@ -1,0 +1,11 @@
+Q1. Backpropagation multiplies local derivatives layer by layer. With sigmoid or tanh these are below 1, so the gradient shrinks exponentially with depth and early layers hardly learn. Residual connections give the gradient a shortcut path, which fixes this; ReLU also helps because its derivative is 1 for positive inputs.
+
+Q2. out = (W - K + 2P)/S + 1 = (32 - 5 + 2*1)/1 + 1 = 30, so the output is 30 x 30.
+
+Q3.
+import math
+def softmax(x):
+    m = max(x)
+    e = [math.exp(v - m) for v in x]
+    s = sum(e)
+    return [v / s for v in e]

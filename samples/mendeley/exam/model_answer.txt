@@ -1,0 +1,37 @@
+Model answers
+
+Q1. D
+Q2. C
+Q3. A
+Q4. C
+Q5. B
+Q6. A
+Q7. A
+Q8. C
+Q9. A
+Q10. B
+Q11. B
+Q12. C
+Q13. B
+Q14. C
+Q15. B
+Q16. C
+Q17. B
+Q18. C
+Q19. B
+Q20. B
+Q21. A type of ML where the model is trained on labeled data with known inputs and outputs.
+Q22. Overfitting; the model has memorized the training data but failed to generalize.
+Q23. A statistical process for estimating the relationships between a dependent variable and one or more independent variables.
+Q24. Data quality/missing values, overfitting/underfitting, data collection, or time consumption.
+Q25. Healthcare/disease prediction, Finance/fraud detection, E-commerce recommendation systems.
+Q26. Structured is organized in rows/columns (SQL, Excel); Semi-structured has some markers but isn't in a grid (JSON, XML, HTML).
+Q27. Detection: Z-score, IQR, Scatter plots, Box plots. Handling: Trimming, Capping, or Imputation.
+Q28. The steps taken to clean and transform raw data into a format suitable for a machine learning model.
+Q29. K-NN is distance-based; features with larger scales will dominate the distance calculation if not normalized.
+Q30. By grouping values into bins or intervals, e.g., turning ages 1-100 into 'Child,' 'Adult,' 'Senior.'
+Q31. The predefined number of clusters or groups the data will be divided into.
+Q32. K in K-NN, Learning Rate, Number of Estimators/Trees, Max Depth, or Batch Size.
+Q33. An optimization algorithm used to minimize the cost function by iteratively moving toward the steepest descent.
+Q34. Discussion on maximizing the margin and ensuring no data points fall within the 'gutter' or margin.
+Q35. It transforms data into a higher-dimensional space to find a non-linear decision boundary.

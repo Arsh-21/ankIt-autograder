@@ -1,0 +1,36 @@
+{
+  "name": "Real exam: Data Science test (Mendeley, handwritten)",
+  "order": 2,
+  "exam": {
+    "question_paper": [
+      "exam/question_paper.txt"
+    ],
+    "marking_scheme": [
+      "exam/marking_scheme.txt"
+    ],
+    "model_answer": [
+      "exam/model_answer.txt"
+    ]
+  },
+  "sheets": {
+    "Student_18: real scan, teacher gave 5/30 on short answers": [
+      "sheets/Student_18.pdf"
+    ],
+    "Student_28: real scan, teacher gave 13/30 on short answers": [
+      "sheets/Student_28.pdf"
+    ],
+    "Student_6: real scan, teacher gave 14/30 on short answers": [
+      "sheets/Student_6.pdf"
+    ],
+    "Student_32: real scan, teacher gave 17.5/30 on short answers": [
+      "sheets/Student_32.pdf"
+    ],
+    "Student_39: real scan, teacher gave 20/30 on short answers": [
+      "sheets/Student_39.pdf"
+    ],
+    "Student_11: real scan, teacher gave 24.5/30 on short answers": [
+      "sheets/Student_11.pdf"
+    ]
+  },
+  "class": "class.zip"
+}

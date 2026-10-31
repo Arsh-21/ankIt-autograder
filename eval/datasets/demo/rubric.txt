@@ -1,0 +1,15 @@
+Marking scheme
+
+Q1 (4 marks)
+- 2 marks: gradients shrink as they are multiplied through many layers during backpropagation, so early layers learn very slowly or stop learning. Mentioning saturating activations (sigmoid/tanh, derivative < 1) is part of this.
+- 2 marks: one valid remedy with a short reason: ReLU-family activations, residual/skip connections, batch normalization, careful initialisation (Xavier/He), or LSTM/GRU gating for RNNs.
+
+Q2 (3 marks)
+- 1 mark: correct formula out = (W - K + 2P)/S + 1
+- 1 mark: correct substitution
+- 1 mark: correct final answer 30 (30x30)
+
+Q3 (3 marks)
+- 1 mark: subtracts the max before exponentiating (numerical stability)
+- 1 mark: exponentiates and divides by the sum
+- 1 mark: returns a list/array of probabilities and the code would run

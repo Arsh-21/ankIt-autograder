@@ -1,0 +1,33 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# generated stuff
+.cache/
+outputs/
+eval/results_*.csv
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+eval/runs/
+.pytest_cache/
+.ruff_cache/
+
+# downloaded datasets (keep licences and student data out of git)
+data/
+# Mendeley scans, plus their redteam / damaged copies
+eval/datasets/mendeley*/
+eval/datasets/saf_*.csv
+eval/datasets/jorgpt*
+
+# ablation run log (scripts/run_ablations.ps1)
+ablation_log.txt

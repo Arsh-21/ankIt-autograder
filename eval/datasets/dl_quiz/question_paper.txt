@@ -1,0 +1,23 @@
+Indian Institute of Technology Madras
+DA3409 Deep Learning - Quiz 2
+Time: 40 minutes                                                       Maximum marks: 20
+
+Answer all questions. Show your working for numerical questions.
+For Q1 and Q2 write only the letter of the correct option.
+
+Q1. Which of the following does NOT reduce the vanishing gradient problem? [1 mark]
+    (a) ReLU activations   (b) Residual connections
+    (c) Sigmoid activations in every layer   (d) Batch normalization
+
+Q2. A convolution layer has 3x3 kernels, 64 input channels and 128 output channels, with one bias per output channel. How many trainable parameters does it have? [1 mark]
+    (a) 73,728   (b) 73,856   (c) 1,152   (d) 147,584
+
+Q3. A 64x64x3 image is passed through a convolution layer with 16 filters of size 5x5, stride 2 and padding 2. Find the shape of the output and the number of trainable parameters of the layer (including biases). Show your working. [3 marks]
+
+Q4. The output of the layer in Q3 is flattened and fed to a fully connected layer with 10 outputs. How many trainable parameters does this fully connected layer have? Show your working. [3 marks]
+
+Q5. A single neuron computes y = sigmoid(wx + b) and the loss is L = 1/2 (y - t)^2. Derive dL/dw. [4 marks]
+
+Q6. Explain dropout: what it does during training, what changes at test time, and why it reduces overfitting. [4 marks]
+
+Q7. Write a Python function softmax(x) that takes a list of numbers and returns their softmax probabilities. It must be numerically stable. In one sentence, explain why your approach does not change the result. [4 marks]

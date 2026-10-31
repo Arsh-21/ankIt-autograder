@@ -1,0 +1,41 @@
+{
+  "name": "Deep learning quiz (scanned paper, handwritten key)",
+  "order": 1,
+  "exam": {
+    "question_paper": [
+      "exam/question_paper_scan.pdf"
+    ],
+    "marking_scheme": [
+      "exam/marking_scheme.pdf"
+    ],
+    "model_answer": [
+      "exam/model_answer_page1.jpg",
+      "exam/model_answer_page2.jpg"
+    ]
+  },
+  "sheets": {
+    "Asha: typed PDF, strong": [
+      "sheets/asha.pdf"
+    ],
+    "Rahul: handwritten scan, 2 pages, out of order": [
+      "sheets/rahul.pdf"
+    ],
+    "Priya: Hindi, two phone photos": [
+      "sheets/priya/page1.jpg",
+      "sheets/priya/page2.jpg"
+    ],
+    "Karthik: Tamil, scanned": [
+      "sheets/karthik.pdf"
+    ],
+    "Meena: weak, mostly blank": [
+      "sheets/meena.pdf"
+    ],
+    "Arjun: rushed handwriting, phone photo": [
+      "sheets/arjun.jpg"
+    ],
+    "Vikram: asks the grader for marks": [
+      "sheets/vikram.pdf"
+    ]
+  },
+  "class": "class.zip"
+}

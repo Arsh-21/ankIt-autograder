@@ -1,0 +1,156 @@
+# ---------------------------------------------------------------
+# अंकIt (Ankit) settings. Everything here can be changed without code.
+#
+# PROFILES say which model serves which job ("role").
+#   vision  - default for jobs that look at images: ocr, recheck,
+#             grader_vision (grading with the page image attached)
+#   text    - default for every text-only job: rubric, segmenter,
+#             grader, critic, tools, summary, class_summary
+#   You can override a single role inside a profile, e.g.
+#     grader: {provider: openrouter, model: "..."}
+#   Each entry can also carry extra_body: {...} which is passed to
+#   the API as-is (e.g. to switch reasoning off on OpenRouter).
+#
+# provider:
+#   mock        - fake model, no download, no internet. Only proves the
+#                 code runs. Its marks MEAN NOTHING.
+#   ollama      - Ollama on this computer (http://localhost:11434)
+#   openrouter  - OpenRouter, needs OPENROUTER_API_KEY in .env
+# ---------------------------------------------------------------
+
+active_profile: mock
+
+profiles:
+  mock:
+    vision: {provider: mock, model: mock}
+    text:   {provider: mock, model: mock}
+    max_parallel: 2
+
+  # Small model on your laptop. Slow on CPU, weak on handwriting and easy
+  # to fool with prompt injection: use it to test that things run.
+  local:
+    vision: {provider: ollama, model: "qwen3-vl:4b"}
+    text:   {provider: ollama, model: "qwen3-vl:4b"}
+    max_parallel: 1
+
+  # Ollama's free cloud models through your local Ollama app
+  # (run "ollama signin" once).
+  ollama_cloud:
+    vision: {provider: ollama, model: "qwen3-vl:235b-cloud"}
+    text:   {provider: ollama, model: "gpt-oss:120b-cloud"}
+    max_parallel: 3
+
+  # The same free Ollama cloud models, called directly (no Ollama app needed).
+  # Needs OLLAMA_API_KEY in .env; exact names: python scripts/list_ollama_models.py
+  ollama_api:
+    vision: {provider: ollama_api, model: "qwen3-vl:235b"}
+    text:   {provider: ollama_api, model: "gpt-oss:120b"}
+    max_parallel: 2
+
+  # OpenRouter (course key). Run  python scripts/list_openrouter_models.py
+  # to see the exact ids and prices your key can use, then edit these.
+  # reasoning effort "low" keeps hidden thinking short (cheaper, and it can't
+  # eat the whole output budget); remove extra_body to let the model think freely.
+  openrouter:
+    vision: {provider: openrouter, model: "google/gemini-2.5-flash", extra_body: {reasoning: {effort: low}}}
+    text:   {provider: openrouter, model: "google/gemini-2.5-flash", extra_body: {reasoning: {effort: low}}}
+    max_parallel: 4
+
+  # Cheaper Gemini, and a non-Google model, for the model comparison.
+  openrouter_lite:
+    vision: {provider: openrouter, model: "google/gemini-2.5-flash-lite"}
+    text:   {provider: openrouter, model: "google/gemini-2.5-flash-lite"}
+    max_parallel: 4
+
+  openrouter_gpt:
+    vision: {provider: openrouter, model: "openai/gpt-4o-mini"}
+    text:   {provider: openrouter, model: "openai/gpt-4o-mini"}
+    max_parallel: 4
+
+# ---------------------------------------------------------------
+# DEFAULT RUN SETTINGS. Every one of these is a toggle in the app,
+# a flag in cli.py, and a key you can override per ablation variant.
+# ---------------------------------------------------------------
+defaults:
+  strictness: standard     # lenient | standard | strict  (grading policy in the prompt)
+  n_samples: 3             # independent grading samples per question
+  aggregation: strictness  # strictness (percentile below) | mean | median | max | min
+  temperature: 0.7         # used only when n_samples > 1
+  seed: 0                  # change to get fresh samples (repeat runs for variance)
+  rubric_mode: auto        # auto | as_is | expand   (auto: as_is if a rubric is given)
+  use_examples: true       # use staff-graded example answers stored in the rubric
+  grader_input: auto       # auto | text | image | both  (auto: both for scanned pages)
+  evidence_check: reject   # reject | flag | off   (quote must be found in the answer)
+  guard_prompt: true       # anti-injection rules in the prompts
+  guard_detector: strip    # off | flag | strip    (rule-based detector for text aimed at the grader)
+  presence_check: true     # blank answers get 0 without a model call
+  use_reflection: true     # critic + one re-grade when samples disagree
+  ocr_recheck: false       # re-read the handwriting where marks were lost, re-grade if misread (extra call per such answer)
+  use_tools: false         # check arithmetic with a calculator (extra calls); student code is never run
+  cross_references: true   # "as explained in Q3": show the grader the answer to Q3 too
+  force_ocr: false         # OCR the answer sheet even if the PDF has a text layer
+  class_summary: true      # batch mode: one call per question to list common mistakes
+  # ---- languages
+  language_hint: auto      # auto | English | Hindi | Tamil | ...  (helps OCR; picks the Bodhan language)
+  ocr_backend: auto        # auto | vlm | bodhan   (auto: Bodhan for an Indic language hint when set up)
+  feedback_language: auto  # auto (= the student's language) | English | Hindi | ...
+  feedback_translator: llm # llm (grader writes it) | bodhan (grader writes English, Bodhan translates)
+  # ---- output
+  annotate: true           # red-ink marks drawn on the scanned pages
+  annotate_locate: true    # one vision call per page to place the marks next to each answer
+
+thresholds:
+  strictness_percentile: {lenient: 75, standard: 50, strict: 25}
+  disagreement_threshold: 0.25   # spread of sample totals > this x max marks -> critic + review flag
+  evidence_match_threshold: 80   # 0-100 fuzzy match needed for an evidence quote
+  grounding_min_coverage: 0.6    # share of a segmented answer that must be found on the sheet
+  unassigned_flag_words: 15      # this much unmatched text on a sheet -> review flag
+  recheck_min_similarity: 50     # corrected transcription must stay this similar to the original
+  max_images_per_question: 3
+  tool_max_steps: 3
+  big_error_fraction: 0.25       # eval: an error >= max(1 mark, this x max) counts as "big"
+
+ingest:
+  max_pages: 30          # per uploaded file, protects your credits
+  pdf_dpi: 200
+  image_max_side: 1600   # images are shrunk to this many pixels (saves tokens)
+  min_text_chars: 40     # a PDF page with less real text than this gets OCR
+  blank_page_max_ink: 0.0005  # page with less ink than this = blank, skips OCR (0 = off)
+  batch_max_files: 2000  # batch zip safety limits
+  batch_max_mb: 500
+
+llm:
+  cache: true            # same prompt again = answer from disk, free
+  timeout_seconds: 600   # local models on CPU can be slow
+  max_retries: 3
+  usd_to_inr: 88         # only for the cost line in reports
+
+# ---------------------------------------------------------------
+# Bodhan AI (course-provided Indic OCR + translation). Fill this from
+# the API docs on console.bodhan.ai, put BODHAN_API_KEY in .env, and set
+# placeholder: false. Field names / paths below are GUESSES until then.
+# ---------------------------------------------------------------
+bodhan:
+  placeholder: false             # true = never call Bodhan (use the vision LLM for Indic OCR)
+  base_url: "https://api.bodhan.ai"
+  ocr:                           # console.bodhan.ai/api-docs  "Document OCR"
+    path: "/v1/chat/completions"
+    model: "indic-ocr"
+    table_format: "markdown"
+    max_tokens: 4096             # per layout block
+  translate:
+    path: "/translate"
+
+# Limits used when the app is public (AUTOGRADER_PUBLIC=1, e.g. on Hugging Face)
+public:
+  max_pages_per_sheet: 8
+  max_students_per_batch: 15
+  allow_tools: false
+
+# USD per 1 million tokens, used only when the API doesn't report cost
+# itself (OpenRouter does report it). Check current prices on
+# openrouter.ai/models; these are placeholders.
+prices:
+  "google/gemini-2.5-flash-lite": {in: 0.10, out: 0.40}
+  "openai/gpt-4o-mini": {in: 0.15, out: 0.60}
+  "google/gemini-2.5-flash": {in: 0.30, out: 2.50}
